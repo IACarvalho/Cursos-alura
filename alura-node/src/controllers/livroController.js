@@ -7,6 +7,22 @@ class LivroController {
       response.status(200).json(livros)
     })
   }
+
+  static cadastrarLivro = (request, response) => {
+    const livro = new livros(request.body)
+
+    livro.save((err) => {
+      if(err) {
+        response.status(500).send({message: `${err.message} - falha ao cadastrar o livro`})
+      }
+
+      else {
+        response.status(201).send(livro.toJSON())
+      }
+    })
+
+
+  }
 }
 
 export default LivroController

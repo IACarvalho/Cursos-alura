@@ -22,12 +22,6 @@ app.get('/livros/:id', (request, response) => {
 })
 
 
-app.post('/livros', (request, response) => {
-  livros.push(request.body)
-
-  return response.status(201).send('Livro cadastrado com sucesso')
-})
-
 app.put('/livros/:id', (request, response) => {
   const { id } = request.params
   const { titulo } = request.body
