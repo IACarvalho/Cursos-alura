@@ -1,6 +1,7 @@
 import express from "express"
 import { db } from "./config/dbConnect.js"
-import { livros } from "./models/Livro.js"
+import livros from "./models/Livro.js"
+import { routes } from "./routes/index.js"
 
 db.on("error", console.log.bind(console, 'Erro de conexão'))
 db.once("open", () => {
@@ -10,15 +11,7 @@ export const app = express()
 
 app.use(express.json())
 
-app.get('/', (request, response) =>{
-  response.status(200).send('Curso Node')
-})
-
-app.get('/livros', (request, response) => {
-  livros.find((err, livros) => {
-    response.status(200).json(livros)
-  })
-})
+routes(app)
 
 app.get('/livros/:id', (request, response) => {
   const { id } = request.params
